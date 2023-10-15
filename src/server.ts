@@ -1,4 +1,5 @@
 import { DataSource } from "typeorm";
+import { Client } from "./entities/Client";
 
 const AppDataSource = new DataSource({
 	type: "postgres",
@@ -7,6 +8,8 @@ const AppDataSource = new DataSource({
 	username: "postgres",
 	password: "postgres",
 	database: "typeorm-app",
+	entities: [Client],
+	synchronize: true
 });
 
 const main = async () => {
