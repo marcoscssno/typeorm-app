@@ -1,11 +1,21 @@
-import express from "express";
+import { DataSource } from "typeorm";
 
-const app = express();
-
-app.get("/", (req, res) => {
-	res.send("Hello, World!");
+const AppDataSource = new DataSource({
+	type: "postgres",
+	host: "localhost",
+	port: 5432,
+	username: "postgres",
+	password: "postgres",
+	database: "typeorm-app",
 });
 
-app.listen(3000, () => {
-	console.log("App running on port 3000");
-});
+const main = async () => {
+	try {
+		await AppDataSource.initialize();
+		console.log("Data Source initialized");
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+main();
